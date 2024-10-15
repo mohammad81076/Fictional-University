@@ -1,3 +1,4 @@
+aaaaaaaaaaaaaaaaaaaa
 <?php get_header();
 
 while (have_posts()) {
@@ -49,7 +50,7 @@ while (have_posts()) {
                     wp_list_pages([
                         'title_li' => NULL,
                         'child_of' => $findChildrenOf
-                    ])
+                    ]);
 
                     ?>
                 </ul>
