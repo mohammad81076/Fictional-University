@@ -15,26 +15,8 @@ get_header(); ?>
 
         <?php
 
-        $nowDate = date('Ymd');
-        $archivePageEvents = new WP_Query
-        ([
-            'posts_per_page' => -1,
-            'post_type' => 'event',
-            'meta_key' => 'event_date',
-            'order_by' => 'meta_value_num',
-            'type' => 'numeric',
-            'meta_query' => [
-                [
-                    'key' => 'event_date',
-                    'compare' => '>=',
-                    'value' => $nowDate
-                ]
-            ],
-
-        ]);
-
-        while ($archivePageEvents->have_posts()) {
-            $archivePageEvents->the_post(); ?>
+        while (have_posts()) {
+           the_post(); ?>
             <div class="event-summary">
                 <a class="event-summary__date t-center" href="<?php the_permalink(); ?>">
                     <span class="event-summary__month"><?php $date_event = new DateTime(get_field('event_date'));
@@ -53,7 +35,8 @@ get_header(); ?>
         <?php }
         echo paginate_links();
         ?>
-
+        <hr class="section-break">
+        <span>if you want see past event<a href="<?php echo site_url('/past-event'); ?>"> click here</a></span>
     </div>
 
 
