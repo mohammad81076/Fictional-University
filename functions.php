@@ -1,5 +1,28 @@
 <?php
 
+function pageBanner($args){
+    if (!$args['title']){
+        $args['title' ]= get_the_title();
+    }
+    if (!$args['sub_title']){
+        $args['sub_title']= get_field('page_banner_sub_title');
+    }
+    if (!$args['img']){
+        $args['img']=get_field('page_banner_background_image')['sizes']['PageBanner'];
+    }
+    ?>
+
+    <div class="page-banner">
+        <div class="page-banner__bg-image"
+             style="background-image: url(<?php echo $args['img'] ?>)"></div>
+        <div class="page-banner__content container t-center c-white">
+            <h1 class="headline headline--large"><?php echo $args['title'] ?></h1>
+            <p><?php echo $args['sub_title'] ?></p>
+            <a href="<?php echo get_post_type_archive_link('program') ?>" class="btn btn--large btn--blue">Find Your
+                Major</a>
+        </div>
+    </div>
+<?php }
 function enqueue_func()
 {
     wp_enqueue_script('index_js', get_theme_file_uri('/build/index.js'), NULL, '1.0', true);
@@ -14,7 +37,11 @@ add_action('wp_enqueue_scripts', 'enqueue_func');
 
 function university_features()
 {
-    add_theme_support('title-tag');
+    add_theme_support('title-tag',);
+    add_theme_support('post-thumbnails');
+    add_image_size('professorLandscape', 400, 260, true);
+    add_image_size('professorPortrait', 480, 650, true);
+    add_image_size('PageBanner', 1500, 350, true);
 }
 
 add_action('after_setup_theme', 'university_features');

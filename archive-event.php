@@ -1,38 +1,22 @@
 <?php
-get_header(); ?>
+get_header();
+pageBanner([
+    'title' =>'All Events',
+    'sub_title' => 'this page show all events',
+    'img' => get_theme_file_uri('/images/library-hero.jpg')
+]);
+?>
 
-    <div class="page-banner">
-        <div class="page-banner__bg-image"
-             style="background-image: url(<?php echo get_theme_file_uri('/images/ocean.jpg') ?>)"></div>
-        <div class="page-banner__content container container--narrow">
-            <h1 class="page-banner__title">All Events</h1>`
-            <div class="page-banner__intro">
-                <p>See Our Event in this Page </p>
-            </div>
-        </div>
-    </div>
+
     <div class="container container--narrow page-section">
 
         <?php
 
         while (have_posts()) {
-           the_post(); ?>
-            <div class="event-summary">
-                <a class="event-summary__date t-center" href="<?php the_permalink(); ?>">
-                    <span class="event-summary__month"><?php $date_event = new DateTime(get_field('event_date'));
-                        echo $date_event->format('M');
-                        ?></span>
-                    <span class="event-summary__day"><?php echo $date_event->format('d'); ?></span>
-                </a>
-                <div class="event-summary__content">
-                    <h5 class="event-summary__title headline headline--tiny"><a
-                                href="<?php the_permalink(); ?>"><?php the_title() ?></a></h5>
-                    <p><?php echo wp_trim_words(get_the_content(), 18); ?> <a
-                                href="<?php the_permalink(); ?>" class="nu gray">Learn more</a></p>
-                </div>
-            </div>
+           the_post();
 
-        <?php }
+            get_template_part('template-parts/content',get_post_type());
+        }
         echo paginate_links();
         ?>
         <hr class="section-break">

@@ -1,16 +1,13 @@
 <?php
-get_header(); ?>
+get_header();
+pageBanner([
+    'title' => 'Welcome Our Blog',
+    'sub_title' => 'this is static sub title',
+    'img' => get_theme_file_uri('/images/library-hero.jpg')
+]);
+?>
 
-    <div class="page-banner">
-        <div class="page-banner__bg-image"
-             style="background-image: url(<?php echo get_theme_file_uri('/images/ocean.jpg') ?>)"></div>
-        <div class="page-banner__content container container--narrow">
-            <h1 class="page-banner__title">Welcome Our Blog</h1>
-            <div class="page-banner__intro">
-                <p>this is blog archive</p>
-            </div>
-        </div>
-    </div>
+
     <div class="container container--narrow page-section">
         <?php while (have_posts()) {
             the_post(); ?>
